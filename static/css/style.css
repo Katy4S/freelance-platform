@@ -1,0 +1,33 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #4CAF50;
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    color: #d4d4d4 !important;
+}
+
+/* Main Content */
+.container h2 {
+    color: #333;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    border: none;
+}
+
+/* Footer */
+footer {
+    background-color: #4CAF50;
+    color: white;
+}
