@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ order.title }}</h1>
+<p>{{ order.description }}</p>
+<p>Client: {{ order.client.company_name }}</p>
+<p>Writer: {% if order.writer %}{{ order.writer.user.username }}{% else %}Not assigned{% endif %}</p>
+<p>Deadline: {{ order.deadline }}</p>
+<p>Status: {% if order.completed %}Completed{% else %}In progress{% endif %}</p>
+{% endblock %}

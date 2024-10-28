@@ -1,6 +1,42 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from models import Order, Writer, Client
+from .models import Client, Writer, Order
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
+
+def index(request):
+    num_clients = Client.objects.count()
+    num_writers = Writer.objects.count()
+    num_orders = Order.objects.count()
+    return render(request, "orders/index.html", {
+        "num_clients": num_clients,
+        "num_writers": num_writers,
+        "num_orders": num_orders
+    })
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("index")
+        else:
+            messages.error(request, "Invalid credentials")
+    return render(request, "registration/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("index")
+
+
+def client_list(request):
+    clients = Client.objects.all()
+    return render(request, "orders/client_list.html", {"clients": clients})
 
 
 @login_required

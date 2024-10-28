@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Client Dashboard</h1>
+
+<h2>Your Orders</h2>
+<ul>
+    {% for order in client_orders %}
+    <li>
+        <a href="{% url 'order_detail' order.pk %}">{{ order.title }}</a>
+        - Writer: {% if order.writer %}{{ order.writer.user.username }}{% else %}Not assigned{% endif %}
+        - Status: {% if order.completed %}Completed{% else %}In progress{% endif %}
+    </li>
+    {% empty %}
+    <li>No orders created yet.</li>
+    {% endfor %}
+</ul>
+
+<h2>Create a New Order</h2>
+<form method="post" action="{% url 'create_order' %}">
+    {% csrf_token %}
+    <label for="title">Order Title:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <label for="deadline">Deadline:</label>
+    <input type="date" id="deadline" name="deadline" required>
+
+    <button type="submit">Create Order</button>
+</form>
+{% endblock %}

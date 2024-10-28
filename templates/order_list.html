@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Orders</h1>
+<ul class="list-group">
+    {% for order in orders %}
+        <li class="list-group-item">
+            <a href="{% url 'order_detail' order.pk %}">{{ order.title }}</a> - Client: {{ order.client.company_name }}
+            - Writer: {% if order.writer %}{{ order.writer.user.username }}{% else %}Not assigned{% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

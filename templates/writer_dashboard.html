@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Writer Dashboard</h1>
+
+<h2>Assigned Orders</h2>
+<ul>
+    {% for order in assigned_orders %}
+    <li>
+        <a href="{% url 'order_detail' order.pk %}">{{ order.title }}</a>
+        - Deadline: {{ order.deadline }} - Status: {% if order.completed %}Completed{% else %}In progress{% endif %}
+    </li>
+    {% empty %}
+    <li>No orders assigned.</li>
+    {% endfor %}
+</ul>
+
+<h2>Available Orders</h2>
+<ul>
+    {% for order in available_orders %}
+    <li>
+        <a href="{% url 'order_detail' order.pk %}">{{ order.title }}</a>
+        - Client: {{ order.client.company_name }} - Deadline: {{ order.deadline }}
+    </li>
+    {% empty %}
+    <li>No available orders.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

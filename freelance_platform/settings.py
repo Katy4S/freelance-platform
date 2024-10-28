@@ -2,6 +2,7 @@ from pathlib import Path
 
 # BASE_DIR for the project
 BASE_DIR = Path(__file__).resolve().parent.parent
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Security settings
 SECRET_KEY = "your-secret-key"
@@ -16,8 +17,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "orders.apps.OrdersConfig"
     "orders",
+
 ]
 
 # Middleware settings
@@ -77,7 +78,7 @@ USE_TZ = True
 # Static files settings
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Custom user model
 AUTH_USER_MODEL = "orders.CustomUser"
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
